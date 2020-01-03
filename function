@@ -1,0 +1,59 @@
+  
+   
+  
+  public string GAge(DateTime dob, int vi)
+        {
+
+            var now = Convert.ToDateTime(DateTime.Now);
+            var years = new DateTime(DateTime.Now.Subtract(dob).Ticks).Year - 1;
+            var pastYearDate = dob.AddYears(years);
+            var months = 0;
+            for (var i = 1; i <= 12; i++)
+            {
+                if (pastYearDate.AddMonths(i) == now)
+                {
+                    months = i;
+                    break;
+                }
+
+                if (pastYearDate.AddMonths(i) < now)
+                    continue;
+                months = i - 1;
+                break;
+            }
+
+
+            var days = now.Subtract(pastYearDate.AddMonths(months)).Days;
+            var hours = now.Subtract(pastYearDate).Hours;
+            var seconds = now.Subtract(pastYearDate).Minutes;
+            var minutes = now.Subtract(pastYearDate).Seconds;
+            
+            if (vi == 0)
+            {
+                return string.Format("{0}", years);
+            }
+            else if (vi == 1)
+            {
+                return string.Format("{0}", months);
+            }
+            else if (vi == 2)
+            {
+                return string.Format("{0}", days);
+            }           
+            else if (vi == 3)
+            {
+                return string.Format("{0}", hours);
+            }
+            else if (vi == 3)
+            {
+                return string.Format("{0}", minutes);
+            }
+            else if (vi == 4)
+            {
+                return string.Format("{0}", seconds);
+            }
+            else
+            {
+                return string.Format("Sorry");
+            }
+        }
